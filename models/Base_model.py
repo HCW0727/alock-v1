@@ -26,7 +26,7 @@ class CNN_Base(nn.Module):
         self.softmax = nn.Softmax(1)
 
         self.flatten = nn.Flatten()
-        self.fc1 = nn.Linear(128 * 24 * 24 ,100)
+        self.fc1 = nn.Linear(8192 ,100)
 
     def forward(self, input_tensor):
         # block 1

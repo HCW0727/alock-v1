@@ -1,5 +1,6 @@
 import torch
 from tqdm import tqdm
+from utils import debug
 
 def eval_model_regression(model, test_loader, criterion, device):
     '''
@@ -52,7 +53,6 @@ def eval_model_classification(model, test_loader, criterion, device):
             loss = criterion(outputs,labels)
 
             evaluation_loss += loss.item() * inputs.size(0)
-
             _, predicted = torch.max(outputs, 1)
             correct += (labels==predicted).sum().item()
 

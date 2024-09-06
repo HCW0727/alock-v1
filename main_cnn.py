@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from utils import create_img_loader
+from utils import create_img_loader, print_model_parameters
 from models import CNN_Base, Unet2, VGG16
 from scripts import train_model, eval_model_classification
 
@@ -25,6 +25,7 @@ def main():
                                      shuffle=True)
 
     # model을 불러옵니다.
+    # model = CNN_Base(3).to(device)
     model = VGG16(3).to(device)
 
     optimizer = optim.Adam(model.parameters(), lr=0.01)
@@ -41,7 +42,7 @@ def main():
                test_loader=test_loader,
                criterion=criterion,
                device=device)
-    
+
 
 if __name__ == "__main__":
     main()

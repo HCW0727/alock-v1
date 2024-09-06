@@ -31,7 +31,7 @@ class VGG16(nn.Module):
 
         # Utils
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.relu = nn.ReLU(inplace=True)
+        self.relu = nn.LeakyReLU()
         self.flatten = nn.Flatten()
 
 
