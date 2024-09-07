@@ -29,7 +29,7 @@ def eval_model_regression(model, test_loader, criterion, device):
 
 
 
-def eval_model_classification(model, test_loader, criterion, device):
+def eval_model_classification(model, test_loader, criterion, device) -> float:
     '''
     모델의 성능을 테스트하는 코드입니다.
 
@@ -38,6 +38,9 @@ def eval_model_classification(model, test_loader, criterion, device):
         test_loader: 테스트 데이터를 불러올 loader
         criterion: 손실 함수
         device: 구동할 device
+
+    Returns:
+        float: top1 acc
     '''
     model.eval()
 
@@ -68,3 +71,5 @@ def eval_model_classification(model, test_loader, criterion, device):
     accuracy_top5 = correct_top5 / len(test_loader.dataset)
 
     print(f"Evaluation Result | loss: {evaluation_loss:.4f}, Top-1 Accuracy: {accuracy_top1:.4f}, Top-5 Accuracy: {accuracy_top5:.4f}")
+
+    return accuracy_top1

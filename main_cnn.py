@@ -1,7 +1,8 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from utils import create_img_loader, parameters_len
+import os
+from utils import create_img_loader, parameters_len, save_model_checkpoint
 from models import CNN_Base, Unet2, VGG16
 from scripts import train_model, eval_model_classification
 
@@ -25,7 +26,6 @@ def main():
                                      shuffle=True)
 
     # model을 불러옵니다.
-    # model = CNN_Base(3).to(device)
     model = VGG16(3).to(device)
     print(f"Model Parameters : {parameters_len(model)}")
     
@@ -34,16 +34,17 @@ def main():
     # model을 train 및 eval 시킵니다.
     train_model(model=model,
                 train_loader=train_loader,
-                epochs=50,
+                epochs=1,
                 optimizer=optimizer,
                 criterion=criterion,
                 device=device)
     
-    eval_model_classification(model=model,
+    eval_acc = eval_model_classification(model=model,
                test_loader=test_loader,
                criterion=criterion,
                device=device)
-
+    
+    save_model_checkpoint(model=model, accuracy=eval_acc)
 
 if __name__ == "__main__":
     main()
