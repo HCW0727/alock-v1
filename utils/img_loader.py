@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import torch
 from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
 
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
@@ -13,6 +14,20 @@ gray_transform = transforms.Compose([
 ])
 
 rgb_transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616))
+])
+
+# Transforms for stl10
+stl10_train_transform = transforms.Compose([
+    transforms.RandomResizedCrop(96, scale=(0.8, 1.0)), 
+    # transforms.RandomHorizontalFlip(),
+    # transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
+    transforms.ToTensor(),
+    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)),
+])
+
+stl10_test_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616))
 ])
@@ -30,15 +45,15 @@ mnist_test_dataset = datasets.MNIST(root = "./data/image/MNIST",
 stl10_train_dataset = datasets.STL10(root= "./data/image/STL10",
                                  split='train',
                                  download=False,
-                                 transform = rgb_transform)
+                                 transform = stl10_train_transform)
 
 stl10_test_dataset = datasets.STL10(root= "./data/image/STL10",
                                  split='test',
                                  download=False,
-                                 transform = rgb_transform)
+                                 transform = stl10_test_transform)
 
 cifar10_train_dataset = datasets.CIFAR10(root= "./data/image/CIFAR10",
-                                 train=True,
+                                 train=False,
                                  download=True,
                                  transform = rgb_transform)
 

@@ -28,7 +28,7 @@ class Unet2(nn.Module):
                                       padding=1)
         
         self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.relu = nn.ReLU()
+        self.relu = nn.LeakyReLU()
         
         # Decoder
         self.decoder_conv_trans1 = nn.ConvTranspose2d(in_channels=256,

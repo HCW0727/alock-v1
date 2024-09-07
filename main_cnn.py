@@ -1,7 +1,7 @@
 import torch
 import torch.optim as optim
 import torch.nn as nn
-from utils import create_img_loader, print_model_parameters
+from utils import create_img_loader, parameters_len
 from models import CNN_Base, Unet2, VGG16
 from scripts import train_model, eval_model_classification
 
@@ -27,13 +27,14 @@ def main():
     # model을 불러옵니다.
     # model = CNN_Base(3).to(device)
     model = VGG16(3).to(device)
-
+    print(f"Model Parameters : {parameters_len(model)}")
+    
     optimizer = optim.Adam(model.parameters(), lr=0.01)
     criterion = nn.CrossEntropyLoss()
     # model을 train 및 eval 시킵니다.
     train_model(model=model,
                 train_loader=train_loader,
-                epochs=10,
+                epochs=50,
                 optimizer=optimizer,
                 criterion=criterion,
                 device=device)

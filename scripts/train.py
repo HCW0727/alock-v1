@@ -30,5 +30,3 @@ def train_model(model, train_loader, epochs, optimizer, criterion, device) -> No
             running_loss += loss.item()
 
         print(f"Epoch {epoch+1} done. Running loss : {running_loss}")
-            
-
