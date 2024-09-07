@@ -41,6 +41,5 @@ def save_model_checkpoint(model, accuracy):
     current_time = datetime.now().strftime("%m%d")
     checkpoint_path = os.path.join(ckpt_base_path, f"{model.__class__.__name__}_{accuracy}_{current_time}.pt")
     torch.save(model, checkpoint_path)
-    
     print(f"Checkpoint saved at {checkpoint_path}")
 
